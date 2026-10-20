@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ==================== نظام الحماية والمصادقة ==================== -->
+    <script src="auth.js"></script>
+    <script>GSMAuth.guard();</script>
+    <link rel="stylesheet" href="auth.css">
+
+    <meta name="description" content="قاعدة بيانات احترافية للأجهزة الذكية: المواصفات التقنية، المعالجات، وطرق الاستخراج المدعومة.">
+    <meta name="theme-color" content="#0f172a">
+    <title>قاعدة بيانات الأجهزة الذكية | GSM Devices</title>
+
+    <!-- خط Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==================== الهيدر ==================== -->
+    <header class="top-header">
+        <div class="header-content">
+            <div class="title-group">
+                <h1>قاعدة بيانات الأجهزة الذكية</h1>
+                <p>استعراض المواصفات التقنية، المعالجات، وطرق الاستخراج المدعومة</p>
+            </div>
+
+            <div class="search-filter-wrapper">
+                <div class="search-box" role="search">
+                    <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M21 21l-4.35-4.35M17 11a6 6 0 1 1-12 0 6 6 0 0 1 12 0z"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="ابحث باسم الجهاز، الموديل، المعالج، أو التشفير..."
+                        autocomplete="off"
+                        aria-label="بحث في الأجهزة"
+                    >
+                    <span id="resultsCount" class="results-badge" aria-live="polite">0 جهاز</span>
+                </div>
+
+                <a href="vendors.html" class="vendor-nav-btn" title="تصفح الأجهزة حسب الشركة">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    تصفح الشركات
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- شريط الفلترة حسب الشركة -->
+    <div id="filterBanner" class="filter-banner" style="display: none;" role="status">
+        <span id="filterBannerText"></span>
+        <a href="index.html" class="clear-filter-btn">عرض جميع الشركات</a>
+    </div>
+
+    <!-- ==================== شبكة البطاقات ==================== -->
+    <main class="main-container">
+        <div id="devices-container" class="devices-grid"></div>
+    </main>
+
+    <!-- ==================== النافذة المنبثقة ==================== -->
+    <div
+        id="deviceModal"
+        class="modal-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+    >
+        <div class="modal-card">
+            <button class="modal-close" type="button" title="إغلاق" aria-label="إغلاق النافذة">&times;</button>
+            <div id="modal-body" class="modal-body"></div>
+        </div>
+    </div>
+
+    <noscript>
+        <div style="padding:20px;text-align:center;background:#fff;color:#dc2626;font-weight:700;">
+            يرجى تفعيل جافاسكريبت لعرض قاعدة البيانات.
+        </div>
+    </noscript>
+
+    <script src="data.js" defer></script>
+</body>
+</html>

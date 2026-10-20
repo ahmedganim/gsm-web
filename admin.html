@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ==================== نظام الحماية — أدمن فقط ==================== -->
+    <script src="auth.js"></script>
+    <script>GSMAuth.guard('admin');</script>
+    <link rel="stylesheet" href="auth.css">
+
+    <meta name="robots" content="noindex, nofollow">
+    <title>لوحة تحكم الأدمن | GSM Devices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-page">
+
+    <header class="admin-header">
+        <div class="header-content">
+            <div class="title-group">
+                <h1>🎛️ لوحة تحكم الأدمن</h1>
+                <p>إدارة الأجهزة والشركات — إضافة، تعديل، حذف، وتصدير</p>
+            </div>
+            <div class="header-actions">
+                <a href="index.html" class="header-btn">↗ عرض الموقع</a>
+                <a href="vendors.html" class="header-btn">🏢 الشركات</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-main">
+
+        <!-- ==================== التبويبات ==================== -->
+        <nav class="admin-tabs" role="tablist">
+            <button class="admin-tab is-active" data-tab="devices" role="tab" aria-selected="true">
+                📱 إدارة الأجهزة
+            </button>
+            <button class="admin-tab" data-tab="vendors" role="tab" aria-selected="false">
+                🏢 إدارة الشركات
+            </button>
+        </nav>
+
+        <!-- ==================== تبويب الأجهزة ==================== -->
+        <section id="tab-devices" class="tab-panel is-active" role="tabpanel">
+
+            <div class="admin-toolbar">
+                <button id="addBtn" class="btn btn-primary" type="button">➕ إضافة جهاز جديد</button>
+                <div class="search-box-admin">
+                    <input type="text" id="adminSearch" placeholder="بحث سريع (اسم، شركة، موديل، معالج)..." autocomplete="off">
+                </div>
+                <div class="toolbar-spacer"></div>
+                <button id="exportBtn" class="btn btn-secondary" type="button" title="تنزيل ملف data.js الجديد">
+                    ⬇ تنزيل data.js
+                </button>
+                <button id="resetBtn" class="btn btn-danger" type="button" title="استعادة البيانات الأصلية">
+                    ↺ استعادة الأصلية
+                </button>
+                <button id="clearStorageBtn" class="btn btn-ghost" type="button" title="حذف localStorage">
+                    🗑️ مسح الذاكرة
+                </button>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <span class="stat-value" id="statTotal">0</span>
+                    <span class="stat-label">إجمالي الأجهزة</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="statVendors">0</span>
+                    <span class="stat-label">الشركات المصنعة</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="statFiltered">0</span>
+                    <span class="stat-label">نتائج البحث</span>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="devices-table devices-table-devices">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>الصورة</th>
+                            <th>الاسم التجاري</th>
+                            <th>الشركة</th>
+                            <th>الموديل</th>
+                            <th>المعالج</th>
+                            <th>النظام</th>
+                            <th style="text-align:center;">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devicesTbody"></tbody>
+                </table>
+                <div id="tableEmpty" class="empty-state" style="display:none;">
+                    لا توجد أجهزة. اضغط على "إضافة جهاز جديد" للبدء.
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== تبويب الشركات ==================== -->
+        <section id="tab-vendors" class="tab-panel" role="tabpanel">
+
+            <div class="admin-toolbar">
+                <button id="addVendorBtn" class="btn btn-primary" type="button">➕ إضافة شركة جديدة</button>
+                <div class="search-box-admin">
+                    <input type="text" id="vendorSearchAdmin" placeholder="بحث في أسماء الشركات..." autocomplete="off">
+                </div>
+                <div class="toolbar-spacer"></div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <span class="stat-value" id="statVendorTotal">0</span>
+                    <span class="stat-label">إجمالي الشركات</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="statVendorWithDevices">0</span>
+                    <span class="stat-label">شركات لديها أجهزة</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="statVendorFiltered">0</span>
+                    <span class="stat-label">نتائج البحث</span>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="devices-table devices-table-vendors">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>الشعار</th>
+                            <th>اسم الشركة</th>
+                            <th>عدد الأجهزة</th>
+                            <th style="text-align:center;">الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vendorsTbody"></tbody>
+                </table>
+                <div id="vendorsEmpty" class="empty-state" style="display:none;">
+                    لا توجد شركات. اضغط على "إضافة شركة جديدة" للبدء.
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- ==================== نافذة الجهاز ==================== -->
+    <div id="deviceModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-card">
+            <button class="modal-close" type="button" aria-label="إغلاق">&times;</button>
+            <div class="modal-header"><h2 id="modalTitle">إضافة جهاز جديد</h2></div>
+            <form id="deviceForm" class="modal-body" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="f-retailName">الاسم التجاري *</label>
+                        <input type="text" id="f-retailName" name="retailName" required placeholder="iPhone 15 Pro">
+                    </div>
+                    <div class="form-group">
+                        <label for="f-vendor">الشركة المصنعة *</label>
+                        <input type="text" id="f-vendor" name="vendor" required placeholder="Apple">
+                    </div>
+                    <div class="form-group">
+                        <label for="f-deviceModel">موديل الجهاز *</label>
+                        <input type="text" id="f-deviceModel" name="deviceModel" required placeholder="A2848">
+                    </div>
+                    <div class="form-group">
+                        <label for="f-soc">المعالج (SoC)</label>
+                        <input type="text" id="f-soc" name="soc" placeholder="Apple">
+                    </div>
+                    <div class="form-group">
+                        <label for="f-processorModel">موديل المعالج</label>
+                        <input type="text" id="f-processorModel" name="processorModel" placeholder="A17 Pro">
+                    </div>
+                    <div class="form-group">
+                        <label for="f-encryptionType">نوع التشفير</label>
+                        <input type="text" id="f-encryptionType" name="encryptionType" placeholder="AES-256">
+                    </div>
+                    <div class="form-group">
+                        <label for="f-systemVersion">إصدار النظام</label>
+                        <input type="text" id="f-systemVersion" name="systemVersion" placeholder="iOS 17">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="f-image">مسار الصورة</label>
+                        <input type="text" id="f-image" name="image" placeholder="imge/image_11.jpg أو https://...">
+                        <div class="image-preview" id="imagePreview"><span>معاينة الصورة</span></div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="f-extractionMethods">طرق الاستخراج (افصل بينها بفاصلة)</label>
+                        <textarea id="f-extractionMethods" name="extractionMethods" rows="3"
+                            placeholder="Android full file system, Qualcomm EDL Extraction"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost modal-close-btn">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">💾 حفظ الجهاز</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== نافذة الشركة ==================== -->
+    <div id="vendorModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-card modal-sm">
+            <button class="modal-close" type="button" aria-label="إغلاق">&times;</button>
+            <div class="modal-header"><h2 id="vendorModalTitle">إضافة شركة جديدة</h2></div>
+            <form id="vendorForm" class="modal-body" novalidate>
+                <div class="form-group">
+                    <label for="v-name">اسم الشركة *</label>
+                    <input type="text" id="v-name" name="name" required placeholder="مثال: Xiaomi">
+                </div>
+                <div class="form-group">
+                    <label for="v-logo">مسار الشعار (اختياري)</label>
+                    <input type="text" id="v-logo" name="logo" placeholder="imge/xiaomi.png">
+                    <div class="image-preview" id="vendorLogoPreview"><span>معاينة الشعار</span></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost modal-close-btn">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">💾 حفظ الشركة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== نافذة تأكيد الحذف ==================== -->
+    <div id="deleteModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-card modal-sm">
+            <button class="modal-close" type="button" aria-label="إغلاق">&times;</button>
+            <div class="modal-header"><h2>⚠️ تأكيد الحذف</h2></div>
+            <div class="modal-body"><p id="deleteMessage"></p></div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" type="button" id="cancelDeleteBtn">إلغاء</button>
+                <button class="btn btn-danger" type="button" id="confirmDeleteBtn">نعم، احذف</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="data.js" defer></script>
+    <script src="admin.js" defer></script>
+</body>
+</html>
