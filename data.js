@@ -9,31 +9,31 @@
    * 1) بيانات الأجهزة الأصلية
    * ============================================================ */
   const devices = [
-    { retailName: "Honor 10", vendor: "Huawei", deviceModel: "COL-AL10", soc: "HiSilicon Kirin", processorModel: "970", encryptionType: "AES-256", systemVersion: "Android 9", extractionMethods: "Android full file system, Kirin Extraction", image: "imge/image_1.jpg" },
-    { retailName: "Nova 4e", vendor: "Huawei", deviceModel: "MAR-AL00", soc: "HiSilicon Kirin", processorModel: "710", encryptionType: "WPA2-PSK", systemVersion: "V16", extractionMethods: "Android full file system, Kirin Extraction", image: "imge/image_2.jpg" },
-    { retailName: "Galaxy J7 Duos", vendor: "Samsung", deviceModel: "SM-J710F", soc: "Exynos", processorModel: "7870", encryptionType: "FDE", systemVersion: "Android 8.0", extractionMethods: "Android full file system, Samsung Exynos", image: "imge/image_3.jpg" },
-    { retailName: "iPhone 12 Pro Max", vendor: "Apple", deviceModel: "A2342", soc: "Apple", processorModel: "A14 Bionic", encryptionType: "AES-256", systemVersion: "iOS 14", extractionMethods: "iOS full logical via SSH", image: "imge/image_4.jpg" },
+    { retailName: "Honor 10", vendor: "Huawei", deviceModel: "COL-AL10", soc: "HiSilicon Kirin", processorModel: "970", encryptionType: "AES-256", systemVersion: "Android 9", extractionMethods: "Android full file system, Kirin Extraction", image: "image_1.jpg" },
+    { retailName: "Nova 4e", vendor: "Huawei", deviceModel: "MAR-AL00", soc: "HiSilicon Kirin", processorModel: "710", encryptionType: "WPA2-PSK", systemVersion: "V16", extractionMethods: "Android full file system, Kirin Extraction", image: "image_2.jpg" },
+    { retailName: "Galaxy J7 Duos", vendor: "Samsung", deviceModel: "SM-J710F", soc: "Exynos", processorModel: "7870", encryptionType: "FDE", systemVersion: "Android 8.0", extractionMethods: "Android full file system, Samsung Exynos", image: "image_3.jpg" },
+    { retailName: "iPhone 12 Pro Max", vendor: "Apple", deviceModel: "A2342", soc: "Apple", processorModel: "A14 Bionic", encryptionType: "AES-256", systemVersion: "iOS 14", extractionMethods: "iOS full logical via SSH", image: "image_4.jpg" },
     { retailName: "A1-734", vendor: "Acer", deviceModel: "A1-734", soc: "MediaTek", processorModel: "MT8735", encryptionType: "WPA2-PSK", systemVersion: "Android 16", extractionMethods: "Android full file system, MTK Android via boot modification, MTK Android Extraction", image: "imge/image_5.jpg" },
     { retailName: "X4 Soul Mini S", vendor: "AllView", deviceModel: "X4_Soul_Mini_S_TM", soc: "MediaTek", processorModel: "MT6737", encryptionType: "Full Disk", systemVersion: "Android 7.0", extractionMethods: "Android full file system, MTK Android via boot modification, MTK Android Extraction", image: "imge/image_6.jpg" },
-    { retailName: "ZenFone 3 Laser", vendor: "ASUS", deviceModel: "Z01BD", soc: "Qualcomm", processorModel: "MSM8937", encryptionType: "Full Disk", systemVersion: "Android 6.0.1", extractionMethods: "Android full file system, Qualcomm EDL Extraction", image: "imge/image_7.jpg" },
-    { retailName: "DTEK60", vendor: "BlackBerry", deviceModel: "BBA100-1", soc: "Qualcomm", processorModel: "MSM8996", encryptionType: "Full Disk", systemVersion: "Android 6.0.1", extractionMethods: "Android full file system, Qualcomm EDL Extraction", image: "imge/image_8.jpg" },
-    { retailName: "3600i", vendor: "Coolpad", deviceModel: "3600i", soc: "Qualcomm", processorModel: "MSM8952", encryptionType: "AES", systemVersion: "AireOS 8.5", extractionMethods: "Android full file system, Qualcomm EDL Extraction", image: "imge/image_9.jpg" },
-    { retailName: "IQ4516 Octa", vendor: "Fly", deviceModel: "IQ4516", soc: "MediaTek", processorModel: "MT6592", encryptionType: "Full Disk", systemVersion: "Android 4.4.2", extractionMethods: "Android full file system, MTK Android via boot modification, MTK Android Extraction", image: "imge/image_10.jpg" }
+    { retailName: "ZenFone 3 Laser", vendor: "ASUS", deviceModel: "Z01BD", soc: "Qualcomm", processorModel: "MSM8937", encryptionType: "Full Disk", systemVersion: "Android 6.0.1", extractionMethods: "Android full file system, Qualcomm EDL Extraction", image: "image_7.jpg" },
+    { retailName: "DTEK60", vendor: "BlackBerry", deviceModel: "BBA100-1", soc: "Qualcomm", processorModel: "MSM8996", encryptionType: "Full Disk", systemVersion: "Android 6.0.1", extractionMethods: "Android full file system, Qualcomm EDL Extraction", image: "image_8.jpg" },
+    { retailName: "3600i", vendor: "Coolpad", deviceModel: "3600i", soc: "Qualcomm", processorModel: "MSM8952", encryptionType: "AES", systemVersion: "AireOS 8.5", extractionMethods: "Android full file system, Qualcomm EDL Extraction", image: "image_9.jpg" },
+    { retailName: "IQ4516 Octa", vendor: "Fly", deviceModel: "IQ4516", soc: "MediaTek", processorModel: "MT6592", encryptionType: "Full Disk", systemVersion: "Android 4.4.2", extractionMethods: "Android full file system, MTK Android via boot modification, MTK Android Extraction", image: "image_10.jpg" }
   ];
 
   /* ============================================================
    * 2) خريطة شعارات الشركات (fallback)
    * ============================================================ */
   const VENDOR_LOGOS = {
-    "Acer":       "imge/Acer5.png",
-    "AllView":    "imge/ALLVIEW6.png",
-    "Apple":      "imge/apple 4.png",
-    "ASUS":       "imge/asus7.png",
-    "BlackBerry": "imge/BLACKBERRY8.png",
-    "Coolpad":    "imge/coolpad9.png",
-    "Fly":        "imge/fly.jpg",
-    "Huawei":     "imge/HUAWEI1+2.png",
-    "Samsung":    "imge/sumsung 3.png"
+    "Acer":       "Acer5.png",
+    "AllView":    "ALLVIEW6.png",
+    "Apple":      "apple 4.png",
+    "ASUS":       "asus7.png",
+    "BlackBerry": "BLACKBERRY8.png",
+    "Coolpad":    "coolpad9.png",
+    "Fly":        "fly.jpg",
+    "Huawei":     "HUAWEI1+2.png",
+    "Samsung":    "sumsung 3.png"
   };
 
   window.devices      = devices;
